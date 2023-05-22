@@ -32,29 +32,19 @@ def statement_generator(statement, decoration):
 
 
 # Functions go here
-def num_check(question, low, high):
-    error = "Please enter a whole number between 1 and 10\n"
-
+# number checker
+def num_check(question, error, num_type):
     valid = False
+
     while not valid:
+
         try:
-            # ask the question
-            response = input(question)
+            response = num_type(input(question))
 
-            # exit loop if user presses enter
-            if response == "":
-                return None
-
-            # convert the response to an integer
-            response = int(response)
-
-            # if the amount is too low / too high give
-            if low < response <= high:
-                return response
-
-            # output an error
-            else:
+            if response < 1 or response > 10:
                 print(error)
+            else:
+                return response
 
         except ValueError:
             print(error)
@@ -84,8 +74,10 @@ if want_instructions == "yes":
 if want_instructions == "no":
     print()
 
-# Ask the user for the number of shapes to calculate
-how_many = num_check("How many shapes would you like to calculate? ", 0, 10)
+# Asks user how many shapes to calculate, must be more (or equal) to 1 and less than (or equal) to 10
+shape_amount = num_check("How many shapes to calculate? ",
+                         "Please enter an integer more than (or equal) to 1 and less than (or equal) to 10\n",
+                         int)
 
-print("You will be calculating {} shapes".format(how_many))
+print("You will be calculating {} shape/s".format(shape_amount))
 print()
