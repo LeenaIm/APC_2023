@@ -32,10 +32,11 @@ def statement_generator(statement, decoration):
 
 
 # Functions go here
-# number checker
+# Number checker (asks user for an integer, minimum is 1 maximum is 10)
+# Displays error message if response is less than 1 or more than 10)
 def num_check(question, error, num_type):
     valid = False
-
+    error = "Please enter an integer more than (or equal) to 1 and less than (or equal) to 10\n"
     while not valid:
 
         try:
@@ -52,7 +53,7 @@ def num_check(question, error, num_type):
 
 # Main Routine goes here...
 
-# statement generator
+# Introduction statement generator
 statement_generator("Welcome to the Area and Perimeter Calculator", "*")
 print()
 

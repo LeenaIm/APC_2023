@@ -31,6 +31,25 @@ def statement_generator(statement, decoration):
     return ""
 
 
+# Functions go here
+# number checker
+def num_check(question, error, num_type):
+    valid = False
+    error = "Please enter an integer more than (or equal) to 1 and less than (or equal) to 10\n"
+    while not valid:
+
+        try:
+            response = num_type(input(question))
+
+            if response < 1 or response > 10:
+                print(error)
+            else:
+                return response
+
+        except ValueError:
+            print(error)
+
+
 # Main Routine goes here...
 
 # statement generator
@@ -41,14 +60,24 @@ print()
 def instructions():
     print()
     print("Instructions go here")
-    print("Program continues...")
+    print()
 
 
 # If users want to see the instructions, display them
 want_instructions = yes_no("Do you want to read the instructions? ")
+
+# If users want to see instructions, show them and continue program
 if want_instructions == "yes":
     instructions()
 
 # If users do not want to see instructions, continue program
-if want_instructions == "no" or want_instructions == "n":
-    print("Program continues...")
+if want_instructions == "no":
+    print()
+
+# Asks user how many shapes to calculate, must be more (or equal) to 1 and less than (or equal) to 10
+shape_amount = num_check("How many shapes to calculate? ",
+                         "Please enter an integer more than (or equal) to 1 and less than (or equal) to 10\n",
+                         int)
+
+print("You will be calculating {} shape/s".format(shape_amount))
+print()
