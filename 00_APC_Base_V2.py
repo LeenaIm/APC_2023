@@ -1,3 +1,5 @@
+import pandas
+
 # checks user response is yes / no
 def yes_no(question):
     valid = False
