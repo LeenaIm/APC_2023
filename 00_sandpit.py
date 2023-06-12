@@ -1,5 +1,6 @@
 import math
 
+
 def choice_checker(question, valid_list, error):
     valid = False
     while not valid:
@@ -60,13 +61,33 @@ def num_check(question, error, num_type):
 
 
 def instructions():
+    print('''\n
+***** Instructions *****
+
+Welcome to the Area & Perimeter Calculator!
+
+Shapes that can be calculated: Square (s), rectangle (r), triangle (t), circle (c)
+
+To use this calculator...
+
+- Enter how many shapes you need to calculate (1-10 only)
+- If you enter square, the calculator will ask you for the length and width
+- If you enter rectangle, the calculator will ask you for the length and width
+- If you enter triangle, the calculator will ask you for the base length, the height and the lengths of your triangle
+- If you enter circle, the calculator will ask you for the radius of your circle.
+
+At the end of your use with the Area & Perimeter calculator, a history will be printed out with your shapes and 
+their Area & Perimeter.
+
+**** Calculator launched! ****''')
     print()
-    print("Instructions go here")
 
 
+# list of valid responses
 yes_no_list = ["yes", "no"]
 shape_list = ["triangle", "square", "circle", "rectangle"]
 
+# statement generator
 statement_generator("Welcome to the Area and Perimeter Calculator", "*")
 print()
 
@@ -81,37 +102,39 @@ print()
 shape_amount = num_check("How many shapes to calculate? ",
                          "Please enter an integer more than (or equal) to 1 and less than (or equal) to 10\n",
                          int)
-print("You will be calculating {} shape/s".format(shape_amount))
 print()
-print("Let's get started...")
+print("Let's get calculating...")
+print()
 
+#
 for shape in range(shape_amount):
     shapes = shape + 1
-    print()
-    choose_instruction = "Please choose from circle (c), triangle (t), square (s), or rectangle (r): "
+    choose_instruction = "Please choose from square (s), rectangle (r), triangle (t) or circle (c): "
 
     heading = "Shape {} of {}".format(shapes, shape_amount)
 
     print(heading)
-    choose_error = "Please choose a shape from the options above!"
+    choose_error = "Please choose a shape from the options above"
     user_choice = choice_checker(choose_instruction, shape_list, choose_error)
     print()
 
     print("You chose: {}".format(user_choice))
 
-    if user_choice == "circle":
-        try:
-            radius = float(input("Enter the radius of the circle: "))
-        except ValueError:
-            print("Invalid input! Please enter a numeric value for the radius.")
-        else:
-            area = math.pi * radius ** 2
-            circumference = 2 * math.pi * radius
+    if user_choice == "square" or user_choice == "rectangle":
+        valid_input = False
+        while not valid_input:
+            try:
+                length = float(input("Enter the length of the {}: ".format(user_choice)))
+                width = float(input("Enter the width of the {}: ".format(user_choice)))
+                valid_input = True
+            except ValueError:
+                print("Invalid input! Please enter a numeric value for length and width.")
+                print()
 
-            print()
-            print("The area of the circle is:", area)
-            print("The circumference of the circle is:", circumference)
+        area = length * width
+        perimeter = 2 * (length + width)
 
-
-
-
+        print()
+        print("The area of the {} is: {}".format(user_choice, area))
+        print("The perimeter of the {} is: {}".format(user_choice, perimeter))
+        print()

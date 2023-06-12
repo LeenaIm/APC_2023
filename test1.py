@@ -45,13 +45,13 @@ def statement_generator(statement, decoration):
     return ""
 
 
-def num_check(question, error, num_type):
+def num_check(question, error, num_type, min_value, max_value):
     valid = False
     while not valid:
         try:
             response = num_type(input(question))
 
-            if response < 1 or response > 10:
+            if response < min_value or response > max_value:
                 print(error)
             else:
                 return response
@@ -83,7 +83,8 @@ if yes_no("Do you want to read the instructions? ") == "yes":
 print()
 shape_amount = num_check("How many shapes to calculate? ",
                          "Please enter an integer more than (or equal) to 1 and less than (or equal) to 10\n",
-                         int)
+                         int, 1, 10)
+
 print()
 print("Let's get calculating...")
 print()
@@ -103,15 +104,19 @@ for shape in range(shape_amount):
     print("You chose: {}".format(user_choice))
 
     if user_choice == "square" or user_choice == "rectangle":
-        try:
-            length = float(input("Enter the length of the {}: ".format(user_choice)))
-            width = float(input("Enter the width of the {}: ".format(user_choice)))
-        except ValueError:
-            print("Invalid input! Please enter a numeric value for length and width.")
-        else:
-            area = length * width
-            perimeter = 2 * (length + width)
+        valid_input = False
+        while not valid_input:
+            try:
+                length = float(input("Enter the length of the {}: ".format(user_choice)))
+                width = float(input("Enter the width of the {}: ".format(user_choice)))
+                valid_input = True
+            except ValueError:
+                print("Invalid input! Please enter a numeric value for length and width.")
+                print()
 
-            print()
-            print("The area of the {} is: {}".format(user_choice, area))
-            print("The perimeter of the {} is: {}".format(user_choice, perimeter))
+        area = length * width
+        perimeter = 2 * (length + width)
+
+        print()
+        print("The area of the {} is: {}".format(user_choice, area))
+        print("The perimeter of the {} is: {}".format(user_choice, perimeter))

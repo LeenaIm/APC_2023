@@ -1,9 +1,7 @@
-# shape checker
+
 def num_check(question, error, num_type):
     valid = False
-
     while not valid:
-
         try:
             response = num_type(input(question))
 
