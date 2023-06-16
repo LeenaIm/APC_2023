@@ -106,7 +106,7 @@ print()
 print("Let's get calculating...")
 print()
 
-#
+# shape choice checker, asks users to choose from shape list
 for shape in range(shape_amount):
     shapes = shape + 1
     choose_instruction = "Please choose from square (s), rectangle (r), triangle (t) or circle (c): "
@@ -138,3 +138,6 @@ for shape in range(shape_amount):
         print("The area of the {} is: {}".format(user_choice, area))
         print("The perimeter of the {} is: {}".format(user_choice, perimeter))
         print()
+
+    if user_choice == "circle":
+        valid_input = False
