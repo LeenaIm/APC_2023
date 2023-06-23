@@ -73,8 +73,9 @@ To use this calculator...
 - Enter how many shapes you need to calculate (1-10 only)
 - If you enter square, the calculator will ask you for the length and width
 - If you enter rectangle, the calculator will ask you for the length and width
-- If you enter triangle, the calculator will ask you for the base length, the height and the lengths
-- If you enter circle, the calculator will ask you for the radius
+- If you enter triangle, the calculator will ask you for the base length, the height and the lengths of your triangle
+- If you enter circle, the calculator will ask you for the radius of your circle.
+
 At the end of your use with the Area & Perimeter calculator, a history will be printed out with your shapes and 
 their Area & Perimeter.
 
@@ -139,24 +140,3 @@ for shape in range(shape_amount):
         print("The area of the {} is: {}".format(user_choice, area))
         print("The perimeter of the {} is: {}".format(user_choice, perimeter))
         print()
-
-# if user chooses circle, ask for radius and circumference to calculate the area and perimeter
-    if user_choice == "circle":
-        valid_input = False
-        while not valid_input:
-            try:
-                radius = float(input("Enter the radius of the {}: ".format(user_choice)))
-                circumference = float(input("Enter the circumference of the {}: ".format(user_choice)))
-                valid_input = True
-            except ValueError:
-                print("Error! Please enter a number for length and width.")
-                print()
-
-        radius = math.pi * radius ** 2
-        circumference = 2 * math.pi * circumference
-
-        print()
-        print("The area of the {} is: {}".format(user_choice, radius))
-        print("The perimeter of the {} is: {}".format(user_choice, circumference))
-        print()
-
