@@ -120,23 +120,50 @@ for shape in range(shape_amount):
 # prints user choice
     print("You chose: {}".format(user_choice))
 
-# if user choice is square or rectangle, asks for length and width to calculate area and perimeter of square/rectangle
+# if user choice is square asks for length and width
 # print error message if user does not enter a number for length or width
-    if user_choice == "square" or user_choice == "rectangle":
-        valid_input = False
-        while not valid_input:
-            try:
-                length = float(input("Enter the length of the {}: ".format(user_choice)))
-                width = float(input("Enter the width of the {}: ".format(user_choice)))
-                valid_input = True
-            except ValueError:
-                print("Error! Please enter a number for length and width.")
-                print()
+if user_choice == "square":
+    valid_input = False
+    while not valid_input:
+        try:
+            length = float(input("Enter the length of the square: ".format(user_choice)))
+            valid_input = True
+        except ValueError:
+            print("Error! Please enter a number for length and width.")
+            print()
 
-        area = length * width
-        perimeter = 2 * (length + width)
+    # calculate square area
+    area = length ** 2
 
-        print()
-        print("The area of the {} is: {}".format(user_choice, area))
-        print("The perimeter of the {} is: {}".format(user_choice, perimeter))
-        print()
+    # calculate square perimeter
+    perimeter = length * 4
+
+    print()
+    print("The area of the {} is: {}".format(user_choice, area))
+    print("The perimeter of the {} is: {}".format(user_choice, perimeter))
+    print()
+
+# if user choice is rectangle, ask for length and width
+# calculates area and perimeter
+# prints error message if user does not enter length and width
+if user_choice == "rectangle":
+    valid_input = False
+    while not valid_input:
+        try:
+            length = float(input("Enter the length of the rectangle: ".format(user_choice)))
+            width = float(input("Enter the width of the rectangle: ".format(user_choice)))
+            valid_input = True
+        except ValueError:
+            print("Error! Please enter a number for the length and width.")
+            print()
+
+    # calculates rectangle area
+    area = length * width
+
+    # calculates rectangle perimeter
+    perimeter = 2 * (length + width)
+
+    print()
+    print("The area of the rectangle is {}".format(area))
+    print("The perimeter of the rectangle is {}".format(perimeter))
+    print()
