@@ -1,4 +1,5 @@
 import math
+import pandas
 
 
 def choice_checker(question, valid_list, error):
@@ -73,8 +74,8 @@ To use this calculator...
 - Enter how many shapes you need to calculate (1-10 only)
 - If you enter square, the calculator will ask you for the length and width
 - If you enter rectangle, the calculator will ask you for the length and width
-- If you enter triangle, the calculator will ask you for the base length, the height and the lengths of your triangle
-- If you enter circle, the calculator will ask you for the radius of your circle.
+- If you enter triangle, the calculator will ask you for the base length, the height and the side lengths 
+- If you enter circle, the calculator will ask you for the radius
 
 At the end of your use with the Area & Perimeter calculator, a history will be printed out with your shapes and 
 their Area & Perimeter.
@@ -117,46 +118,25 @@ for shape in range(shape_amount):
     choose_error = "Please choose a shape from the options above"
     user_choice = choice_checker(choose_instruction, shape_list, choose_error)
     print()
-# prints user choice
-    print("You chose: {}".format(user_choice))
-
-# if user choice is square asks for length and width
-# print error message if user does not enter a number for length or width
-if user_choice == "square":
-    valid_input = False
-    while not valid_input:
-        try:
-            length = float(input("Enter the length of the square: ".format(user_choice)))
-            valid_input = True
-        except ValueError:
-            print("Error! Please enter a number for length and width.")
-            print()
-
-    # calculate square area
-    area = length ** 2
-
-    # calculate square perimeter
-    perimeter = length * 4
-
-    print()
-    print("The area of the {} is: {}".format(user_choice, area))
-    print("The perimeter of the {} is: {}".format(user_choice, perimeter))
+    # prints user choice
+    print("Your shape is: {}".format(user_choice))
     print()
 
-# if user choice is rectangle, ask for length and width
-# calculates area and perimeter
-# prints error message if user does not enter length and width
-
-    if user_choice == "square":
+    if user_choice == "triangle":
         valid_input = False
         while not valid_input:
             try:
-                length = float(input("Enter the length of the square: "))
-                if length < 1:
-                    print("Error! Please enter a positive value for the length.")
+                base = float(input("Enter the base of the triangle: "))
+                height = float(input("Enter the height of the triangle: "))
+                if base <= 0 or height <= 0:
+                    print("Error! Please enter a positive value for base and height.")
                     print()
-                else:
-                    valid_input = True
+                    continue  # Repeat the loop if input is invalid
+                print()
+                sideA = float(input("Enter side A of the triangle: "))
+                sideB = float(input("Enter side B of the triangle: "))
+                sideC = float(input("Enter the side C of the triangle: "))
+                valid_input = True
             except ValueError:
-                print("Error! Please enter a number for length.")
+                print("Error! Please enter a number for the base and height.")
                 print()

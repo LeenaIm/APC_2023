@@ -1,5 +1,5 @@
 import math
-import pandas
+import pandas as pd
 
 
 def choice_checker(question, valid_list, error):
@@ -107,6 +107,7 @@ print()
 print("Let's get calculating...")
 print()
 
+
 # shape choice checker, asks users to choose from shape list
 for shape in range(shape_amount):
     shapes = shape + 1
@@ -129,11 +130,7 @@ for shape in range(shape_amount):
         while not valid_input:
             try:
                 length = float(input("Enter the length of the square: ".format(user_choice)))
-                if length <= 0:
-                    print("Error! Please enter a positive value for the length.")
-                    print()
-                else:
-                    valid_input = True
+                valid_input = True
             except ValueError:
                 print("Error! Please enter a number for length and width.")
                 print()
@@ -158,11 +155,7 @@ for shape in range(shape_amount):
             try:
                 length = float(input("Enter the length of the rectangle: ".format(user_choice)))
                 width = float(input("Enter the width of the rectangle: ".format(user_choice)))
-                if length <= 0 or width <= 0:
-                    print("Error! Please enter a positive value for the length and width.")
-                    print()
-                else:
-                    valid_input = True
+                valid_input = True
             except ValueError:
                 print("Error! Please enter a number for the length and width.")
                 print()
@@ -186,11 +179,7 @@ for shape in range(shape_amount):
         while not valid_input:
             try:
                 radius = float(input("Enter the radius of the circle: ".format(user_choice)))
-                if radius < 1:
-                    print("Error! Please enter a positive value for radius.")
-                    print()
-                else:
-                    valid_input = True
+                valid_input = True
             except ValueError:
                 print("Error! Please enter a number for the radius.")
                 print()

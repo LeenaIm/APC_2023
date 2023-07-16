@@ -128,14 +128,14 @@ for shape in range(shape_amount):
         valid_input = False
         while not valid_input:
             try:
-                length = float(input("Enter the length of the square: ".format(user_choice)))
-                if length <= 0:
+                length = float(input("Enter the length of the square: "))
+                if length < 1:
                     print("Error! Please enter a positive value for the length.")
                     print()
                 else:
                     valid_input = True
             except ValueError:
-                print("Error! Please enter a number for length and width.")
+                print("Error! Please enter a number for length.")
                 print()
 
         # calculate square area
@@ -149,87 +149,3 @@ for shape in range(shape_amount):
         print("The perimeter of the {} is: {}".format(user_choice, perimeter))
         print()
 
-    # if user choice is rectangle, ask for length and width
-    # calculates area and perimeter
-    # prints error message if user does not enter length and width
-    if user_choice == "rectangle":
-        valid_input = False
-        while not valid_input:
-            try:
-                length = float(input("Enter the length of the rectangle: ".format(user_choice)))
-                width = float(input("Enter the width of the rectangle: ".format(user_choice)))
-                if length <= 0 or width <= 0:
-                    print("Error! Please enter a positive value for the length and width.")
-                    print()
-                else:
-                    valid_input = True
-            except ValueError:
-                print("Error! Please enter a number for the length and width.")
-                print()
-
-        # calculates rectangle area
-        area = length * width
-
-        # calculates rectangle perimeter
-        perimeter = 2 * (length + width)
-
-        print()
-        print("The area of the rectangle is {}".format(area))
-        print("The perimeter of the rectangle is {}".format(perimeter))
-        print()
-
-    # if user choice is circle, ask for radius
-    # calculates area and perimeter
-    # prints error message if user does not enter number for radius
-    if user_choice == "circle":
-        valid_input = False
-        while not valid_input:
-            try:
-                radius = float(input("Enter the radius of the circle: ".format(user_choice)))
-                if radius < 1:
-                    print("Error! Please enter a positive value for radius.")
-                    print()
-                else:
-                    valid_input = True
-            except ValueError:
-                print("Error! Please enter a number for the radius.")
-                print()
-
-        # calculate circle area
-        area = math.pi * radius ** 2
-
-        # calculate circle perimeter
-        circumference = 2 * math.pi * radius
-
-        print()
-        print("The area of the circle is: {}".format(area))
-        print("The perimeter of the circle is: {}".format(circumference))
-        print()
-
-    # if user chooses triangle, asks for base and height to calculate the area and perimeter
-    # print error message if user does not enter number for base and height
-    if user_choice == "triangle":
-        valid_input = False
-        while not valid_input:
-            try:
-                base = float(input("Enter the base of the triangle: ".format(user_choice)))
-                height = float(input("Enter the height of the triangle: ".format(user_choice)))
-                print()
-                sideA = float(input("Enter side A of the triangle: ".format(user_choice)))
-                sideB = float(input("Enter side B of the triangle: ".format(user_choice)))
-                sideC = float(input("Enter the side C of the triangle: ".format(user_choice)))
-                valid_input = True
-            except ValueError:
-                print("Error! Please enter a number for the base and height.")
-                print()
-
-        # calculate triangle area
-        area = 0.5 * base * height
-
-        # calculate triangle perimeter
-        perimeter = sideA + sideB + sideC
-
-        print()
-        print("The area of the triangle is: {}".format(area))
-        print("The perimeter of the triangle is: {}".format(perimeter))
-        print()
