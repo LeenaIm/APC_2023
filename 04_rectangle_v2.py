@@ -122,17 +122,22 @@ for shape in range(shape_amount):
     print("Your shape is: {}".format(user_choice))
     print()
 
+
     if user_choice == "rectangle":
         valid_input = False
         while not valid_input:
             try:
                 length = float(input("Enter the length of the rectangle: ".format(user_choice)))
-                width = float(input("Enter the width of the rectangle: ".format(user_choice)))
-                if length < 1 or width < 1:
-                    print("Error! Please enter a positive value for the length and width.")
+                if length <= 0:
+                    print("Error! Please enter a positive value for length.")
                     print()
-                else:
-                    valid_input = True
+                    continue
+                width = float(input("Enter the width of the rectangle: ".format(user_choice)))
+                if width <= 0:
+                    print("Error! Please enter a positive value for width.")
+                    print()
+                    continue
+                valid_input = True
             except ValueError:
                 print("Error! Please enter a number for the length and width.")
                 print()
@@ -148,28 +153,4 @@ for shape in range(shape_amount):
         print("The perimeter of the rectangle is {}".format(perimeter))
         print()
 
-    if user_choice == "square":
-        valid_input = False
-        while not valid_input:
-            try:
-                length = float(input("Enter the length of the square: "))
-                if length < 1:
-                    print("Error! Please enter a positive value for the length.")
-                    print()
-                else:
-                    valid_input = True
-            except ValueError:
-                print("Error! Please enter a number for length.")
-                print()
-
-        # calculate square area
-        area = length ** 2
-
-        # calculate square perimeter
-        perimeter = length * 4
-
-        print()
-        print("The area of the {} is: {}".format(user_choice, area))
-        print("The perimeter of the {} is: {}".format(user_choice, perimeter))
-        print()
 

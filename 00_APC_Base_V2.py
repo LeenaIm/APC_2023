@@ -2,6 +2,12 @@ import math
 import pandas
 
 
+# choice checker
+# list of valid options
+# iterates through list and if response is an item
+# in the list (or the first letter of an item), the
+# full item name is returned
+# output error if item not in list
 def choice_checker(question, valid_list, error):
     valid = False
     while not valid:
@@ -15,6 +21,9 @@ def choice_checker(question, valid_list, error):
         print()
 
 
+# if response is yes/y, function returns yes
+# if response no/n, function returns no
+# prints error message and asks question again if response is neither yes or no
 def yes_no(question):
     valid = False
     while not valid:
@@ -33,6 +42,7 @@ def yes_no(question):
             print()
 
 
+# statement generator
 def statement_generator(statement, decoration):
     sides = decoration * 3
 
@@ -46,13 +56,18 @@ def statement_generator(statement, decoration):
     return ""
 
 
+# asks user question (how many shapes)
+# if response is less or equal to 0 or more than 10
+# prints error message if user does not enter number/number
+# less or equal to 0 or more than 10
+# return response for anything else
 def num_check(question, error, num_type):
     valid = False
     while not valid:
         try:
             response = num_type(input(question))
 
-            if response < 1 or response > 10:
+            if response <= 0 or response > 10:
                 print(error)
             else:
                 return response
@@ -61,6 +76,7 @@ def num_check(question, error, num_type):
             print(error)
 
 
+# Instructions - how to play
 def instructions():
     print('''\n
 ***** Instructions *****
@@ -115,7 +131,7 @@ for shape in range(shape_amount):
     heading = "Shape {} of {}".format(shapes, shape_amount)
 
     print(heading)
-    choose_error = "Please choose a shape from the options above"
+    choose_error = "Error! Please choose a shape from the options..."
     user_choice = choice_checker(choose_instruction, shape_list, choose_error)
     print()
     # prints user choice
@@ -124,6 +140,8 @@ for shape in range(shape_amount):
 
     # if user choice is square asks for length and width
     # print error message if user does not enter a number for length or width
+    # print error message if user does not enter positive value for length or width
+    # repeats question
     if user_choice == "square":
         valid_input = False
         while not valid_input:
@@ -152,17 +170,23 @@ for shape in range(shape_amount):
     # if user choice is rectangle, ask for length and width
     # calculates area and perimeter
     # prints error message if user does not enter length and width
+    # prints error message if user does not enter positive value for length/width
+    # repeats question
     if user_choice == "rectangle":
         valid_input = False
         while not valid_input:
             try:
                 length = float(input("Enter the length of the rectangle: ".format(user_choice)))
-                width = float(input("Enter the width of the rectangle: ".format(user_choice)))
-                if length <= 0 or width <= 0:
-                    print("Error! Please enter a positive value for the length and width.")
+                if length <= 0:
+                    print("Error! Please enter a positive value for length.")
                     print()
-                else:
-                    valid_input = True
+                    continue
+                width = float(input("Enter the width of the rectangle: ".format(user_choice)))
+                if width <= 0:
+                    print("Error! Please enter a positive value for width.")
+                    print()
+                    continue
+                valid_input = True
             except ValueError:
                 print("Error! Please enter a number for the length and width.")
                 print()
@@ -181,12 +205,14 @@ for shape in range(shape_amount):
     # if user choice is circle, ask for radius
     # calculates area and perimeter
     # prints error message if user does not enter number for radius
+    # prints error message if user does not enter positive value for radius
+    # repeats question
     if user_choice == "circle":
         valid_input = False
         while not valid_input:
             try:
                 radius = float(input("Enter the radius of the circle: ".format(user_choice)))
-                if radius < 1:
+                if radius <= 0:
                     print("Error! Please enter a positive value for radius.")
                     print()
                 else:
@@ -208,16 +234,35 @@ for shape in range(shape_amount):
 
     # if user chooses triangle, asks for base and height to calculate the area and perimeter
     # print error message if user does not enter number for base and height
+    # print error message if user does not enter positive value for base and height
+    # repeats question
     if user_choice == "triangle":
         valid_input = False
         while not valid_input:
             try:
-                base = float(input("Enter the base of the triangle: ".format(user_choice)))
-                height = float(input("Enter the height of the triangle: ".format(user_choice)))
+                base = float(input("Enter the base of the triangle: "))
+                if base <= 0:
+                    print("Error! Please enter a positive value for base.")
+                    print()
+                    continue
+                height = float(input("Enter the height of the triangle: "))
+                if height <= 0:
+                    print("Error! Please enter a positive value for height.")
+                    print()
+                    continue
                 print()
-                sideA = float(input("Enter side A of the triangle: ".format(user_choice)))
-                sideB = float(input("Enter side B of the triangle: ".format(user_choice)))
-                sideC = float(input("Enter the side C of the triangle: ".format(user_choice)))
+                sideA = float(input("Enter side A of the triangle: "))
+                if sideA <= 0:
+                    print("Error! Please enter a positive value for side A.")
+                    print()
+                sideB = float(input("Enter side B of the triangle: "))
+                if sideB <= 0:
+                    print("Error! Please enter a positive value for side B.")
+                    print()
+                sideC = float(input("Enter the side C of the triangle: "))
+                if sideC <= 0:
+                    print("Error! Please enter a positive value for side C.")
+                    print()
                 valid_input = True
             except ValueError:
                 print("Error! Please enter a number for the base and height.")
