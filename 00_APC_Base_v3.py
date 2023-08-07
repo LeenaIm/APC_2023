@@ -2,25 +2,6 @@ import math
 import pandas
 
 
-# choice checker
-# list of valid options
-# iterates through list and if response is an item
-# in the list (or the first letter of an item), the
-# full item name is returned
-# output error if item not in list
-def choice_checker(question, valid_list, error):
-    valid = False
-    while not valid:
-        response = input(question).lower()
-
-        for item in valid_list:
-            if response == item[0] or response == item:
-                return item
-
-        print(error)
-        print()
-
-
 # if response is yes/y, function returns yes
 # if response no/n, function returns no
 # prints error message and asks question again if response is neither yes or no
@@ -144,7 +125,7 @@ for shape in range(shape_amount):
 
     print(heading)
     choose_error = "Error! Please choose a shape from the options..."
-    user_choice = choice_checker(choose_instruction, shape_list, choose_error)
+    user_choice = string_checker(choose_instruction, shape_list, choose_error)
     print()
     # prints user choice
     print("Your shape is: {}".format(user_choice))
