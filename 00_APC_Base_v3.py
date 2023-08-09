@@ -2,21 +2,41 @@ import math
 import pandas
 
 
-# if response is yes/y, function returns yes
-# if response no/n, function returns no
-# prints error message and asks question again if response is neither yes or no
-def string_checker(question, num_letters, valid_responses):
-    error = "Please choose {} or {}".format(valid_responses[0],
-                                            valid_responses[1])
+# Checks that user has entered yes / no to a question
+def yes_no(question):
+    to_check = ["yes", "no"]
 
-    while True:
+    valid = False
+    while not valid:
+
         response = input(question).lower()
 
-        for item in valid_responses:
-            if response == item[:num_letters] or response == item:
+        for var_item in to_check:
+            if response == var_item:
+                return response
+            elif response == var_item[0]:
+                return var_item
+
+        print("Please enter either yes or no...\n")
+
+
+# choice checker
+# list of valid options
+# iterates through list and if response is an item
+# in the list (or the first letter of an item), the
+# full item name is returned
+# output error if item not in list
+def choice_checker(question, valid_list, error):
+    valid = False
+    while not valid:
+        response = input(question).lower()
+
+        for item in valid_list:
+            if response == item[0] or response == item:
                 return item
 
         print(error)
+        print()
 
 
 # statement generator
@@ -82,7 +102,6 @@ statement_generator("Welcome to the Area and Perimeter Calculator", "*")
 print()
 
 # list of valid responses
-yes_no_list = ["yes", "no"]
 shape_list = ["triangle", "square", "circle", "rectangle"]
 
 # dictionaries to hold shape details
@@ -101,8 +120,7 @@ shape_dict = {
 # asks user if they want to read instructions
 # if yes, displays instructions
 # Ask user if they want to see the instructions
-want_instructions = string_checker("Do you want to read the instructions (y/n): ", 1, yes_no_list)
-
+want_instructions = yes_no("Would you like to read the instructions? (y/n): ")
 if want_instructions == "yes":
     instructions()
 
@@ -119,13 +137,13 @@ print()
 # shape choice checker, asks users to choose from shape list
 for shape in range(shape_amount):
     shapes = shape + 1
-    choose_instruction = "Please choose from square (s), rectangle (r), triangle (t) or circle (c): "
+    choose_shape = "Please choose from square (s), rectangle (r), triangle (t) or circle (c): "
 
     heading = "Shape {} of {}".format(shapes, shape_amount)
 
     print(heading)
     choose_error = "Error! Please choose a shape from the options..."
-    user_choice = string_checker(choose_instruction, shape_list, choose_error)
+    user_choice = choice_checker(choose_shape, shape_list, choose_error)
     print()
     # prints user choice
     print("Your shape is: {}".format(user_choice))
@@ -161,6 +179,12 @@ for shape in range(shape_amount):
         print("The perimeter of the square is: {:.2f}".format(perimeter_square))
         print()
 
+        # add shape, dimensions, perimeter and area to list
+        all_shapes.append(user_choice)
+        all_dimensions.append(length)
+        all_areas.append(area_square)
+        all_perimeters.append(perimeter_square)
+
     # if user choice is rectangle, ask for length and width
     # calculates area and perimeter
     # prints error message if user does not enter length and width
@@ -193,9 +217,15 @@ for shape in range(shape_amount):
 
         # prints area and perimeter of rectangle
         print()
-        print("The area of the rectangle is {}".format(area_rectangle))
-        print("The perimeter of the rectangle is {}".format(perimeter_rectangle))
+        print("The area of the rectangle is {:.2f}".format(area_rectangle))
+        print("The perimeter of the rectangle is {:.2f}".format(perimeter_rectangle))
         print()
+
+        # add shape, dimensions, perimeter and area to list
+        all_shapes.append(user_choice)
+        all_dimensions.append((length, width))
+        all_areas.append(area_rectangle)
+        all_perimeters.append(perimeter_rectangle)
 
     # if user choice is circle, ask for radius
     # calculates area and perimeter
@@ -224,9 +254,15 @@ for shape in range(shape_amount):
 
         # prints area and perimeter of circle
         print()
-        print("The area of the circle is: {:.2f}".format(area_circle))
         print("The circumference of the circle is: {:.2f}".format(circumference_circle))
+        print("The area of the circle is: {:.2f}".format(area_circle))
         print()
+
+        # add shape, dimensions, perimeter and area to list
+        all_shapes.append(user_choice)
+        all_dimensions.append(radius)
+        all_areas.append(area_circle)
+        all_perimeters.append(circumference_circle)
 
     # if user chooses triangle, asks for base and height to calculate the area and perimeter
     # print error message if user does not enter number for base and height
@@ -299,8 +335,18 @@ for shape in range(shape_amount):
         print("The perimeter of the triangle is: {:.2f}".format(perimeter_triangle))
         print()
 
+        # add shape, dimensions, perimeter and area to list
+        all_shapes.append(user_choice)
+        all_dimensions.append((base, height, side1, side2, side3))
+        all_perimeters.append(perimeter_triangle)
+        all_areas.append(area_triangle)
+
+# create data frame from dictionary to organise information
 shape_history_df = pandas.DataFrame(shape_dict)
 
-# Display the user's shape history using pandas DataFrame
-print("\n**** Shape History ****\n")
+# rounds columns to 2 decimal places
+shape_history_df = shape_history_df.round(2)
+
+# display the user's shape history using pandas DataFrame
+print("\n**** Shape Calculation History ****\n")
 print(shape_history_df)

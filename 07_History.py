@@ -21,27 +21,6 @@ def choice_checker(question, valid_list, error):
         print()
 
 
-# if response is yes/y, function returns yes
-# if response no/n, function returns no
-# prints error message and asks question again if response is neither yes or no
-def yes_no(question):
-    valid = False
-    while not valid:
-        response = input(question).lower()
-
-        if response == "yes" or response == "y":
-            response = "yes"
-            return response
-
-        elif response == "no" or response == "n":
-            response = "no"
-            return response
-
-        else:
-            print("Please answer yes / no")
-            print()
-
-
 # statement generator
 def statement_generator(statement, decoration):
     sides = decoration * 3
@@ -123,7 +102,10 @@ shape_dict = {
 
 # asks user if they want to read instructions
 # if yes, displays instructions
-if yes_no("Do you want to read the instructions? ") == "yes":
+# Ask user if they want to see the instructions
+want_instructions = choice_checker("Do you want to read the instructions (y/n): ", 0, yes_no_list)
+
+if want_instructions == "yes":
     instructions()
 
 # asks user how many shapes they want to calculate
@@ -139,13 +121,13 @@ print()
 # shape choice checker, asks users to choose from shape list
 for shape in range(shape_amount):
     shapes = shape + 1
-    choose_instruction = "Please choose from square (s), rectangle (r), triangle (t) or circle (c): "
+    choose_shape = "Please choose from square (s), rectangle (r), triangle (t) or circle (c): "
 
     heading = "Shape {} of {}".format(shapes, shape_amount)
 
     print(heading)
     choose_error = "Error! Please choose a shape from the options..."
-    user_choice = choice_checker(choose_instruction, shape_list, choose_error)
+    user_choice = choice_checker(choose_shape, shape_list, choose_error)
     print()
     # prints user choice
     print("Your shape is: {}".format(user_choice))
@@ -170,16 +152,22 @@ for shape in range(shape_amount):
                 print()
 
         # calculate square area
-        area = length ** 2
+        area_square = length ** 2
 
         # calculate square perimeter
-        perimeter = length * 4
+        perimeter_square = length * 4
 
         # prints area and perimeter of square
         print()
-        print("The area of the {} is: {}".format(user_choice, area))
-        print("The perimeter of the {} is: {}".format(user_choice, perimeter))
+        print("The area of the square is: {:.2f}".format(area_square))
+        print("The perimeter of the square is: {:.2f}".format(perimeter_square))
         print()
+
+        # add shape, dimensions, perimeter and area to list
+        all_shapes.append(user_choice)
+        all_dimensions.append(length)
+        all_areas.append(area_square)
+        all_perimeters.append(perimeter_square)
 
     # if user choice is rectangle, ask for length and width
     # calculates area and perimeter
@@ -206,16 +194,22 @@ for shape in range(shape_amount):
                 print()
 
         # calculates rectangle area
-        area = length * width
+        area_rectangle = length * width
 
         # calculates rectangle perimeter
-        perimeter = 2 * (length + width)
+        perimeter_rectangle = 2 * (length + width)
 
         # prints area and perimeter of rectangle
         print()
-        print("The area of the rectangle is {}".format(area))
-        print("The perimeter of the rectangle is {}".format(perimeter))
+        print("The area of the rectangle is {:.2f}".format(area_rectangle))
+        print("The perimeter of the rectangle is {:.2f}".format(perimeter_rectangle))
         print()
+
+        # add shape, dimensions, perimeter and area to list
+        all_shapes.append(user_choice)
+        all_dimensions.append((length, width))
+        all_areas.append(area_rectangle)
+        all_perimeters.append(perimeter_rectangle)
 
     # if user choice is circle, ask for radius
     # calculates area and perimeter
@@ -237,16 +231,22 @@ for shape in range(shape_amount):
                 print()
 
         # calculate circle area
-        area = math.pi * radius ** 2
+        area_circle = math.pi * radius ** 2
 
         # calculate circle perimeter
-        circumference = 2 * math.pi * radius
+        circumference_circle = 2 * math.pi * radius
 
         # prints area and perimeter of circle
         print()
-        print("The area of the circle is: {}".format(area))
-        print("The circumference of the circle is: {}".format(circumference))
+        print("The circumference of the circle is: {:.2f}".format(circumference_circle))
+        print("The area of the circle is: {:.2f}".format(area_circle))
         print()
+
+        # add shape, dimensions, perimeter and area to list
+        all_shapes.append(user_choice)
+        all_dimensions.append(radius)
+        all_areas.append(area_circle)
+        all_perimeters.append(circumference_circle)
 
     # if user chooses triangle, asks for base and height to calculate the area and perimeter
     # print error message if user does not enter number for base and height
@@ -271,35 +271,35 @@ for shape in range(shape_amount):
         valid_input = False
         while not valid_input:
             try:
-                sideA = float(input("Enter side A of the triangle: "))
-                if sideA <= 0:
-                    print("Error! Please enter a positive value for side A.")
+                side1 = float(input("Enter side 1 of the triangle: "))
+                if side1 <= 0:
+                    print("Error! Please enter a positive value for side 1.")
                     print()
                     continue
                 valid_input = True
             except ValueError:
-                print("Error! Please enter a number for side A.")
+                print("Error! Please enter a number for side 1.")
                 print()
 
         valid_input = False
         while not valid_input:
             try:
-                sideB = float(input("Enter side B of the triangle: "))
-                if sideB <= 0:
-                    print("Error! Please enter a positive value for side B.")
+                side2 = float(input("Enter side 2 of the triangle: "))
+                if side2 <= 0:
+                    print("Error! Please enter a positive value for side 2.")
                     print()
                     continue
                 valid_input = True
             except ValueError:
-                print("Error! Please enter a number for side B.")
+                print("Error! Please enter a number for side 2.")
                 print()
 
         valid_input = False
         while not valid_input:
             try:
-                sideC = float(input("Enter side C of the triangle: "))
-                if sideC <= 0:
-                    print("Error! Please enter a positive value for side C.")
+                side3 = float(input("Enter side 3 of the triangle: "))
+                if side3 <= 0:
+                    print("Error! Please enter a positive value for side 3.")
                     print()
                     continue
                 valid_input = True
@@ -308,20 +308,29 @@ for shape in range(shape_amount):
                 print()
 
         # calculate triangle area
-        area = 0.5 * base * height
+        area_triangle = 0.5 * base * height
 
         # calculate triangle perimeter
-        perimeter = sideA + sideB + sideC
+        perimeter_triangle = side1 + side2 + side3
 
         # prints area and perimeter of triangle
         print()
-        print("The area of the triangle is: {}".format(area))
-        print("The perimeter of the triangle is: {}".format(perimeter))
+        print("The area of the triangle is: {:.2f}".format(area_triangle))
+        print("The perimeter of the triangle is: {:.2f}".format(perimeter_triangle))
         print()
 
-column = ["Chicken", "Cow", "Sheep"]
-titled_column = {"name": column,
-                 "height": [1.45, 1.98, 1.24],
-                 "weight": [40, 20, 10]}
-data = pandas.DataFrame(titled_column)
-print(data)
+        # add shape, dimensions, perimeter and area to list
+        all_shapes.append(user_choice)
+        all_dimensions.append((base, height, side1, side2, side3))
+        all_perimeters.append(perimeter_triangle)
+        all_areas.append(area_triangle)
+
+# create data frame from dictionary to organise information
+shape_history_df = pandas.DataFrame(shape_dict)
+
+# round all numeric columns to 2 decimal places
+shape_history_df = shape_history_df.round(2)
+
+# display the user's shape history using pandas DataFrame
+print("\n**** Shape Calculation History ****\n")
+print(shape_history_df)
