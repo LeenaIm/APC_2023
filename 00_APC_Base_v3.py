@@ -87,7 +87,7 @@ To use this calculator...
 - Enter how many shapes you need to calculate (1-10 only)
 - If you enter square, the calculator will ask you for the length and width
 - If you enter rectangle, the calculator will ask you for the length and width
-- If you enter triangle, the calculator will ask you for the base length, the height and the side lengths 
+- If you enter triangle, the calculator will ask you for the base, the height and the side lengths 
 - If you enter circle, the calculator will ask you for the radius
 
 At the end of your use with the Area & Perimeter calculator, a history will be printed out with your shapes and 
@@ -127,7 +127,7 @@ if want_instructions == "yes":
 # asks user how many shapes they want to calculate
 # prints error message if answer is not an integer from min 1 - max 10
 print()
-shape_amount = num_check("How many shapes to calculate? ",
+shape_amount = num_check("How many shapes to calculate? (1-10): ",
                          "Please enter an integer more than (or equal) to 1 and less than (or equal) to 10\n",
                          int)
 print()
